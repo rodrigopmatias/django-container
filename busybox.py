@@ -199,14 +199,17 @@ def cmd_start():
     os.chdir(APP_HOME)
     os.environ.update(HOME='/home/user')
 
-    call(
-        [
-            os.path.join(APP_ENV, 'bin', 'uwsgi'),
-            '--yml',
-            os.path.join(APP_ETC, 'uwsgi.yml')
-        ],
-        shell=False
-    )
+    try:
+        call(
+            [
+                os.path.join(APP_ENV, 'bin', 'uwsgi'),
+                '--yml',
+                os.path.join(APP_ETC, 'uwsgi.yml')
+            ],
+            shell=False
+        )
+    except KeyboardInterrupt:
+        print('the end')
 
 
 @cm.reg('root_shell')
